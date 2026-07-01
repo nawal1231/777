@@ -10,6 +10,11 @@
 			html, body { background: #000; color: #fff; }
 			#page-wrapper { background: transparent; }
 			a, a:link, a:visited { color: #9cf; }
+			/* styled spans for staggered pop-up */
+			.rwhy { color: rgba(145, 4, 4, 0.527); font-weight: 700; display: inline-block; margin-right: 6px; opacity: 0; transform: translateY(8px); transition: opacity 360ms ease, transform 360ms ease; }
+			.rwhy.visible { opacity: 1; transform: translateY(0); }
+			#why-container { text-align: center; margin: 2rem 0; }
+			.big-number { color: red; font-weight: 700; font-size: 4rem; display: inline-block; line-height: 1; }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -44,7 +49,7 @@
 				<section class="wrapper style5">
 					<div class="inner">
 						<h3>why why</h3>
-						<p id="why-container"><strong style="color:red;"></strong></p>
+						<p id="why-container"><strong class="big-number"></strong></p>
 						<hr />
 						<h4>why why</h4>
 						<p>why why</p>
@@ -76,20 +81,13 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script>
-		// Generate and insert 90,000 'why' tokens (space-separated) into the page
+		// Set the requested red bold number
 		document.addEventListener('DOMContentLoaded', function () {
-			var count = 90000;
-			var chunk = 'why';
 			var strong = document.querySelector('#why-container strong');
 			if (!strong) return;
-			// Build in chunks to avoid huge intermediate arrays why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why
-			var parts = [];
-			var blockSize = 1000;
-			var block = new Array(blockSize).fill(chunk).join(' ');
-			for (var i = 0; i < Math.floor(count / blockSize); i++) parts.push(block);
-			var rem = count % blockSize;
-			if (rem) parts.push(new Array(rem).fill(chunk).join(' '));
-			strong.textContent = parts.join(' ');
+			strong.textContent = '90000000';
+			strong.style.color = 'red';
+			strong.style.fontWeight = '700';
 		});
 		</script>
 
