@@ -74,13 +74,33 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script>
-		// Set the requested red bold number
+		// Replace every whole-word "why" with "rad" and add styling
 		document.addEventListener('DOMContentLoaded', function () {
-			var strong = document.querySelector('#why-container strong');
-			if (!strong) return;
-			strong.textContent = 'lol ';
-			strong.style.color = 'red';
-			strong.style.fontWeight = '700';
+			// Add CSS class for replaced words
+			var style = document.createElement('style');
+			style.textContent = '.why-word { color: #ff6; font-weight:700; }';
+			document.head.appendChild(style);
+
+			// Walk text nodes and replace whole-word occurrences of "why" (case-insensitive)
+			var re = /\bwhy\b/gi;
+			var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+			var nodes = [];
+			var node;
+			while (node = walker.nextNode()) {
+				if (re.test(node.nodeValue)) {
+					nodes.push(node);
+				}
+				re.lastIndex = 0;
+			}
+
+			nodes.forEach(function(textNode) {
+				var html = textNode.nodeValue.replace(/\bwhy\b/gi, function() {
+					return '<span class="why-word">rad</span>';
+				});
+				var span = document.createElement('span');
+				span.innerHTML = html;
+				textNode.parentNode.replaceChild(span, textNode);
+			});
 		});
 		</script>
 
