@@ -44,9 +44,7 @@
 				<section class="wrapper style5">
 					<div class="inner">
 						<h3>why why</h3>
-						<p><strong style="color:red;">90000000 why</strong></p>
-						<p>why why</p>
-						<p>why why</p>
+						<p id="why-container"><strong style="color:red;"></strong></p>
 						<hr />
 						<h4>why why</h4>
 						<p>why why</p>
@@ -77,6 +75,23 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script>
+		// Generate and insert 90,000 'why' tokens (space-separated) into the page
+		document.addEventListener('DOMContentLoaded', function () {
+			var count = 90000;
+			var chunk = 'why';
+			var strong = document.querySelector('#why-container strong');
+			if (!strong) return;
+			// Build in chunks to avoid huge intermediate arrays why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why why
+			var parts = [];
+			var blockSize = 1000;
+			var block = new Array(blockSize).fill(chunk).join(' ');
+			for (var i = 0; i < Math.floor(count / blockSize); i++) parts.push(block);
+			var rem = count % blockSize;
+			if (rem) parts.push(new Array(rem).fill(chunk).join(' '));
+			strong.textContent = parts.join(' ');
+		});
+		</script>
 
 	</body>
 </html>
